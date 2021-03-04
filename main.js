@@ -19,7 +19,7 @@ app.post('/result',async (req, res) =>{
         
         let response = await axios({
         method: 'POST',
-        url: 'https://cs189.salesforce.com/services/oauth2/token?grant_type=password&client_id=3MVG904d7VkkD2aPQ30sHABE6QfRVEHUCclbUz9miMAdnaidBTE3qR0Gk80ORpwblXCSRt7TAuRDEV8eGGdOd&client_secret=357C2C8AF3F49994A3425BA9B6BF0815B86E42EA2CE7BFFEA0BF8F702434ACE3&username=sujan.guha@viatris.com&password=Welcome@14znGnjH3ItOghxZeKN5x5EQ1'
+        url: 'https://viatrissfidemea.my.salesforce.com/services/oauth2/token?grant_type=password&client_id=3MVG9lsAlIP.W_V9otvIK.bMmeat46zqSHqFoJpgYGnmAlLyDz8JRJhghRA3q3yTa2yll_JqfdYyKXNyM1YJ8&client_secret=09AC17BDB0BBA2B4626DE5D8C830EF2E9B78CC37D03DC2CFEB313EE4B52952AA&username=sidhant.jain2@cognizant.com.viatrisprod&password=Prod@20210yIvSNvWSph4ciI4Qct3jZOs'
         });
          
         var accesstoken = 'Authorization Bearer '+response.data.access_token
@@ -27,7 +27,7 @@ app.post('/result',async (req, res) =>{
         {
             let response1 = await axios({ 
                 method: 'POST',
-                url: 'https://cs189.salesforce.com/services/apexrest/myl_RestApiController/v1',
+                url: 'https://viatrissfidemea.my.salesforce.com/services/apexrest/myl_RestApiController/v1',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': accesstoken,
