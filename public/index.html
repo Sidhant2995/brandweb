@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <h2>Patient Registration Website</h2>
+    <meta charset="utf-8">
+    <title>Node</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+	<style>
+		body {background-color: powderblue;}
+		form { background-color: rgb(16, 216, 252);padding: 100px;text-align: left;margin: auto;display: table;}
+		button { background-color: rgb(16, 216, 252);margin: auto;display: table;}
+	</style>
+  </head>
+  <body>
+	<form name="patient_details" enctype='application/json'>
+		
+		<p><label for="first_name">First Name:</label>
+        <input type="text" name="FirstName" id="fname"></p>
+		
+		<p><label for="last_name">Last Name:</label>
+        <input type="text" name="LastName" id="lname"></p>
+		
+		<p><label for="email">Email:</label>
+        <input type="text" name="Email" id="email"></p>
+		
+		<p><label for="zipCode">Zip Code:</label>
+        <input type="text" name="ZipCode" id="zipCode"></p>
+		
+		<p><label for="city">City:</label>
+        <input type="text" name="City" id="city"></p>
+		
+		<p><label for="productName">Brand Name:</label>
+        <input type="text" name="ProductName" id="productName"></p>
+		
+		<p><label for="productCode">Brand Code:</label>
+        <input type="text" name="ProductCode" id="productCode"></p>
+	<p><label for="groupNumber">Group Number:</label>
+        <input type="text" name="GroupNumber" id="groupNumber"></p>
+       
+        <p><label for="tCardNumber">Trial Card Number:</label>
+        <input type="text" name="TCardNumber" id="tCardNumber"></p>
+       
+        <p><label for="bitlyCode">Bitly Code:</label>
+        <input type="text" name="BitlyCode" id="bitlyCode"></p>	
+	<p><label for="stayintheknow">Stay in the Know:</label>
+
+        <input type="checkbox" name="StayInTheKnow" id="stayintheknow" value="false"></p>	
+    </form>
+    <button value="Submit" onclick="handleClick()">SUBMIT</button>
+</body>
+<script type="text/javascript">
+    $("#stayintheknow").on('change', function() 
+         {
+            if ($(this).is(':checked')) {
+                $(this).attr('value', 'true');
+            } else {
+                $(this).attr('value', 'false');
+            }
+
+            $('#checkbox-value').text($('#stayintheknow').val());
+        });
+	(function ($) {
+        $.fn.serializeFormJSON = function () {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function () {
+                if (o[this.name]) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+    })(jQuery);
+function handleClick() {
+    console.log('button was clicked');
+    var formData = $(patient_details).serializeFormJSON();
+    console.log('JsonData',formData);
+    $.ajax({
+        type: "POST",
+        url: '/result',
+        data: formData
+      });
+    /*fetch('/result', {method: 'POST',body:sformData,headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }})
+    .then(function(response) {
+        console.log(response)
+    if(response.ok) {
+        console.log('Click was recorded');
+        return;
+    }
+    throw new Error('Request failed.');
+    })
+    .catch(function(error) {
+    console.log(error);
+    });*/
+}
+</script>
+</html> 
